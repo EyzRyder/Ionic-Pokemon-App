@@ -14,7 +14,7 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
         {props.name}
       </h2>
       <p>{getIdFromUrl(props.url)}</p>
-      <Link to={props.url} className='bg-tertiary-default py-2 px-3 rounded-md'> Ver </Link>
+      <Link to={`pokemon/${getIdFromUrl(props.url)}`} className='bg-tertiary-default py-2 px-3 rounded-md'> Ver </Link>
     </div>
   );
 };
