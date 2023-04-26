@@ -35,11 +35,11 @@ const Home: React.FC = () => {
           data && (
             <div className='flex gap-4 justify-center items-center'>
               <div>{"< Prev"}</div>
-              <ul className='flex gap-1'>
+              <div className='flex gap-1'>
                 <Link to={"/"} className='underline text-secondary-default'>1</Link>
                 <Link to={"/"} className='underline text-secondary-default'>2</Link>
                 <Link to={"/"} className='underline text-secondary-default'>{data.count}</Link>
-              </ul>
+              </div>
               <div>{"Next >"}</div>
             </div>
           )
