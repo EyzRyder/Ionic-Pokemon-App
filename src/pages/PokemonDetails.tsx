@@ -15,10 +15,6 @@ const PokemonDetails: React.FC = () => {
     return response.data
   });
 
-  const typeColors = {
-    "background":"red"
-  }
-
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -33,7 +29,7 @@ const PokemonDetails: React.FC = () => {
                 {data.name}
                 <span>#{data.id}</span>
               </h2>
-              <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${data.id}.png `} alt={data.name} />
+              <img src={data.sprites.versions['generation-v']['black-white'].front_default} alt={data.name}/>
               <table className='flex flex-col gap-2'>
                 <tr className='flex flex-row gap-2'>
                   <td className='font-bold'>Height</td>
@@ -48,7 +44,7 @@ const PokemonDetails: React.FC = () => {
                 <h3>Types</h3>
                 <div className='flex  gap-2'>
                   {data.types.map(type => (
-                    <span className='px-3 py-1 rounded-full' style={typeColors}>
+                    <span className={`px-3 py-1 rounded-full ${type.type.name}`}>
                       {type.type.name}
                     </span>
                   ))}
