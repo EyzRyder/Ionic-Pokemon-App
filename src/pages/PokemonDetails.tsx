@@ -3,13 +3,16 @@ import {
   IonIcon,
   IonPage,
 } from '@ionic/react';
-import './Home.scss';
-import { useQuery } from 'react-query';
-import { getOnePokemon } from '../services/pokeApi';
-import { Pokemon } from '../types/pokemon';
-import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
+import { playCircleOutline, pauseCircleOutline, handLeft } from 'ionicons/icons';
+// dependencies
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router';
+// helpers
+import { getOnePokemon } from '../services/pokeApi';
 import { TransformCMtoM, TransformGtoKG } from '../services/helpers';
+//types
+import { Pokemon } from '../types/pokemon';
 
 const PokemonDetails: React.FC = () => {
   const { id } = useParams();
@@ -17,71 +20,89 @@ const PokemonDetails: React.FC = () => {
     const response = await getOnePokemon(id);
     return response.data
   });
-  const [pokeimg, setPokeimg] = useState<string | undefined>("");
+
+  const [pokeimg, setPokeimg] = useState<string | undefined>();
+  const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
-    setPokeimg(data?.sprites.versions['generation-v']['black-white'].front_default)
-  }, [data])
+    animated
+      ? setPokeimg(data?.sprites.versions['generation-v']['black-white'].animated.front_default)
+      : setPokeimg(data?.sprites.versions['generation-v']['black-white'].front_default)
+
+  }, [data, animated])
+
+  const imgStyle = {
+
+    width: animated ? '14rem' : '24rem',
+    margin: animated ? '5rem 5rem ' : ''
+  }
 
   return (
     <IonPage>
       <IonContent fullscreen>
         <div className='flex justify-center items-center min-h-screen relative '>
-
           {isFetching && (
             <div className='absolute'> loading</div>
           )}
           {data &&
-            <div className="flex flex-row max-md:flex-col justify-between items-center gap-2 px-10 py-8 bg-slate-600 rounded-lg w-[65vw] h-[80vh]">
-              <div>
-                <h1 className='text-primary-default font-semibold text-center text-2xl'>
+            <>
+              <div className="flex flex-row max-md:flex-col justify-between items-center gap-2 px-10 py-8 bg-slate-600 rounded-lg w-[65vw] h-[80vh]">
+                <div>
+                  <div >
+                    <img
+                      src={pokeimg}
+                      style={imgStyle}
+                      alt={data.name}
+                    />
+                  </div>
+                </div>
+                <div className='px-10 py-10 rounded-lg bg-gray-500 '>
+              <h1 className='flex justify-between text-primary-default font-semibold text-center text-2xl mb-6'>
+                <span>
                   {data.name}
-                  <span>#{data.id}</span>
-                </h1>
-                <div className='relative'>
-                  <img
-                    src={pokeimg}
-                    className='w-96'
-                    alt={data.name}
-                  />
-                  <IonIcon />
-                </div>
-              </div>
-              <div className='px-10 py-10 rounded-lg bg-gray-500 '>
-                <table className='flex flex-col gap-2'>
-                  <tr className='flex flex-row gap-2'>
-                    <td className='font-bold'>Height</td>
-                    <td>{TransformCMtoM(data.height)} m</td>
-                  </tr>
-                  <tr className='flex flex-row gap-2'>
-                    <td className='font-bold'>Weight</td>
-                    <td>{TransformGtoKG(data.weight)} kg</td>
-                  </tr>
-                </table>
-                <div className='flex flex-col gap-3'>
-                  <div>
-                    <h3 className='pb-1'>Types</h3>
-                    <div className='flex gap-2'>
-                      {data.types.map(type => (
-                        <span className={`px-3 py-1 mt-1 rounded-full ${type.type.name}`}>
-                          {type.type.name}
-                        </span>
-                      ))}
+                </span>
+                <span>#{data.id}</span>
+                <IonIcon
+                  icon={animated ? pauseCircleOutline : playCircleOutline}
+                  onClick={() => { setAnimated((state) => !state) }}
+                />
+              </h1>
+                  <table className='flex flex-col gap-2'>
+                    <tr className='flex flex-row gap-2'>
+                      <td className='font-bold'>Height</td>
+                      <td>{TransformCMtoM(data.height)} m</td>
+                    </tr>
+                    <tr className='flex flex-row gap-2'>
+                      <td className='font-bold'>Weight</td>
+                      <td>{TransformGtoKG(data.weight)} kg</td>
+                    </tr>
+                  </table>
+                  <div className='flex flex-col gap-3'>
+                    <div>
+                      <h3 className='pb-1'>Types</h3>
+                      <div className='flex gap-2'>
+                        {data.types.map(type => (
+                          <span className={`px-3 py-1 mt-1 rounded-full ${type.type.name}`}>
+                            {type.type.name}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h3 className='pb-1'>Abilities</h3>
-                    <div className='flex flex-wrap gap-2'>
-                      {data.abilities.map(abilityData => (
-                        <span>
-                          {abilityData.ability.name}
-                        </span>
-                      ))}
+                    <div>
+                      <h3 className='pb-1'>Abilities</h3>
+                      <div className='flex flex-wrap gap-2'>
+                        {data.abilities.map(abilityData => (
+                          <span>
+                            {abilityData.ability.name}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>}
+            </>
+          }
         </div>
       </IonContent>
     </IonPage>
