@@ -44,7 +44,7 @@ const PokemonDetails: React.FC = () => {
           )}
           {data &&
             <>
-              <div className="flex flex-row max-md:flex-col justify-between items-center gap-2 px-10 py-8 bg-primary-default rounded-lg w-[65vw] h-[80vh]">
+              <div className="flex flex-row max-lg:flex-col justify-between items-center gap-4 px-10 py-8 bg-primary-default rounded-lg max-md:w-[80vw] w-[65vw] h-[80vh]">
                 <div className='bg-secondary-tint border-[1.5rem] border-white w-72 h-72 flex justify-center items-center overflow-hidden rounded-t-md rounded-bl-[3.5rem] rounded-br-md shadow-inner shadow-gray-300'>
                     <img
                       src={pokeimg}
@@ -64,9 +64,11 @@ const PokemonDetails: React.FC = () => {
                   icon={animated ? pauseCircleOutline : playCircleOutline}
                   onClick={() => { setAnimated((state) => !state) }}
                 />
-                <div className='bg-tertiary-default px-5 py-6 rounded-md'>
+                <div className='bg-tertiary-shade px-5 py-6 rounded-md'>
 
                   <table className='flex flex-col gap-2'>
+                    <tbody>
+
                     <tr className='flex flex-row gap-2'>
                       <td className='font-bold'>Height</td>
                       <td>{TransformCMtoM(data.height)} m</td>
@@ -75,6 +77,7 @@ const PokemonDetails: React.FC = () => {
                       <td className='font-bold'>Weight</td>
                       <td>{TransformGtoKG(data.weight)} kg</td>
                     </tr>
+                    </tbody>
                   </table>
                   <div className='flex flex-col gap-3'>
                     <div>
