@@ -32,29 +32,26 @@ const PokemonDetails: React.FC = () => {
   }, [data, animated])
 
   const imgStyle = {
-
-    width: animated ? '14rem' : '24rem',
-    margin: animated ? '5rem 5rem ' : ''
+    height: animated ? '50%' : '100%',
   }
 
   return (
     <IonPage>
-      <IonContent fullscreen>
+      <IonContent fullscreen style={{ "--background": "var(--ion-color-secondary-tint)" }}>
         <div className='flex justify-center items-center min-h-screen relative '>
           {isFetching && (
             <div className='absolute'> loading</div>
           )}
           {data &&
             <>
-              <div className="flex flex-row max-md:flex-col justify-between items-center gap-2 px-10 py-8 bg-slate-600 rounded-lg w-[65vw] h-[80vh]">
-                <div>
-                  <div >
+              <div className="flex flex-row max-md:flex-col justify-between items-center gap-2 px-10 py-8 bg-primary-default rounded-lg w-[65vw] h-[80vh]">
+                <div className='bg-secondary-tint border-[1.5rem] border-white w-72 h-72 flex justify-center items-center overflow-hidden rounded-t-md rounded-bl-[3.5rem] rounded-br-md shadow-inner shadow-gray-300'>
                     <img
                       src={pokeimg}
-                      style={imgStyle}
+                  style={imgStyle}
+                  className='transition-all duration-300'
                       alt={data.name}
                     />
-                  </div>
                 </div>
                 <div className='px-10 py-10 rounded-lg bg-gray-500 '>
               <h1 className='flex justify-between text-primary-default font-semibold text-center text-2xl mb-6'>
@@ -62,11 +59,13 @@ const PokemonDetails: React.FC = () => {
                   {data.name}
                 </span>
                 <span>#{data.id}</span>
+                </h1>
                 <IonIcon
                   icon={animated ? pauseCircleOutline : playCircleOutline}
                   onClick={() => { setAnimated((state) => !state) }}
                 />
-              </h1>
+                <div className='bg-tertiary-default px-5 py-6 rounded-md'>
+
                   <table className='flex flex-col gap-2'>
                     <tr className='flex flex-row gap-2'>
                       <td className='font-bold'>Height</td>
@@ -97,6 +96,7 @@ const PokemonDetails: React.FC = () => {
                           </span>
                         ))}
                       </div>
+                        </div>
                     </div>
                   </div>
                 </div>

@@ -19,7 +19,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-        <IonContent fullscreen>
+      <IonContent fullscreen style={{ "--background":"var(--ion-color-secondary-tint)"}}>
           {isFetching && (
             <div> loading</div>
         )}
