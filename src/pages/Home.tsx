@@ -23,7 +23,7 @@ const Home: React.FC = () => {
           {isFetching && (
             <div> loading</div>
         )}
-        <div className='flex flex-wrap gap-7 justify-center items-center'>
+        <div className='flex flex-wrap gap-7 justify-center items-center py-6 px-3'>
         {
             data && data.results.map((pokemon: PokemonListResults) => (
             <PokeCard key={pokemon.name} name={pokemon.name} url={pokemon.url}/>
