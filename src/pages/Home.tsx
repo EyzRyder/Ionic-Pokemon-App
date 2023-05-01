@@ -2,7 +2,6 @@ import {
   IonContent,
   IonPage,
 } from '@ionic/react';
-import './Home.scss';
 import { useQuery } from 'react-query';
 import { getAllPokemon } from '../services/pokeApi';
 import PokeCard from '../components/PokeCard';
