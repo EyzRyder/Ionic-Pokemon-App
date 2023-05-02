@@ -36,15 +36,20 @@ const PokemonDetails: React.FC = () => {
     height: animated ? '70%' : '100%',
   }
 
+  function changeIDtoNumber(id:string|undefined):number{
+    if(id === null || id === undefined || typeof id === "undefined" || (typeof id === "string" && id.trim().length === 0)) {return 1};
+    return parseInt(id);
+  }
+
   return (
     <IonPage>
       <IonContent fullscreen style={{ "--background": "var(--ion-color-secondary-tint)" }}>
         <div className='flex justify-center items-center min-h-screen relative '>
-          {parseInt(id) > 1 &&
+          {changeIDtoNumber(id) > 1 &&
             <IonIcon
               icon={arrowBackOutline}
               onClick={async() => {
-                await navigate('/pokemon/' + (parseInt(id)-1));
+                await navigate('/pokemon/' + (changeIDtoNumber(id)-1));
                 await refetch();
               }}
               className='absolute text-black top-10 left-10 text-xl hover:bg-primary-default bg-slate-100 p-3 rounded-full transition-all duration-200  cursor-pointer z-10 max-lg:translate-y-1/2 max-lg:top-[50%]'
@@ -53,7 +58,7 @@ const PokemonDetails: React.FC = () => {
           <IonIcon
             icon={arrowForwardOutline}
             onClick={async () => {
-              await navigate('/pokemon/' + (parseInt(id) + 1));
+              await navigate('/pokemon/' + (changeIDtoNumber(id) + 1));
               await refetch();
             }}
             className='absolute text-black top-10 right-10 text-xl hover:bg-primary-default bg-slate-100 p-3 rounded-full transition-all duration-200  cursor-pointer z-10 max-lg:translate-y-1/2 max-lg:top-[50%]'
