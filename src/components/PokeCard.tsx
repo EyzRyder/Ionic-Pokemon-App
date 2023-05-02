@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './ExploreContainer.scss';
 import { getIdFromUrl } from '../services/helpers';
 
-interface PokeCardProps { 
+interface PokeCardProps {
   name: string;
   url: string;
 }
