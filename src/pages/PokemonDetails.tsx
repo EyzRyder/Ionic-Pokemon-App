@@ -47,7 +47,7 @@ const PokemonDetails: React.FC = () => {
                 await navigate('/pokemon/' + (parseInt(id)-1));
                 await refetch();
               }}
-              className='absolute text-black top-10 left-10 text-xl hover:bg-primary-default bg-slate-100 p-3 rounded-full transition-all duration-200'
+              className='absolute text-black top-10 left-10 text-xl hover:bg-primary-default bg-slate-100 p-3 rounded-full transition-all duration-200  cursor-pointer z-10 max-lg:translate-y-1/2 max-lg:top-[50%]'
             />
           }
           <IonIcon
@@ -56,7 +56,7 @@ const PokemonDetails: React.FC = () => {
               await navigate('/pokemon/' + (parseInt(id) + 1));
               await refetch();
             }}
-            className='absolute text-black top-10 right-10 text-xl hover:bg-primary-default bg-slate-100 p-3 rounded-full transition-all duration-200'
+            className='absolute text-black top-10 right-10 text-xl hover:bg-primary-default bg-slate-100 p-3 rounded-full transition-all duration-200  cursor-pointer z-10 max-lg:translate-y-1/2 max-lg:top-[50%]'
           />
           {isFetching && (
             <div className='absolute'> loading</div>
@@ -74,7 +74,7 @@ const PokemonDetails: React.FC = () => {
                   <IonIcon
                     icon={animated ? pauseCircleOutline : playCircleOutline}
                     onClick={() => { setAnimated((state) => !state) }}
-                    className='absolute text-primary-default bottom-1 right-1 text-xl'
+                    className='absolute text-primary-default bottom-1 right-1 text-xl cursor-pointer'
                   />
                 </div>
                 <div className='px-10 py-10 rounded-lg bg-gray-500 '>
