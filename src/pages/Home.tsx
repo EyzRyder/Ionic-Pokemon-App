@@ -36,7 +36,7 @@ const Home: React.FC = () => {
 
         {
           data && (
-            <div className='flex gap-4 justify-center items-center'>
+            <div className='flex px-3 py-4 gap-4 justify-center items-center'>
               {page >= 1 && (
                 <>
                   <p onClick={async () => { await setPage(0); await refetch(); }}>{"<< Start"}</p>
